@@ -1,4 +1,15 @@
 {% extends 'base.html' %}
-
-{% block title %}Khronium{% endblock %}
-
+{%load static%}
+{% block title %}Khronium - Home Page{% endblock %}
+{% block additionalMetaData%}
+    <link rel="stylesheet" href="{% static 'css/landingPage.css' %}" type="text/css">
+    <style>
+        body{background: linear-gradient(black, black), url("{%static 'images/hourglass.jpg'%}") no-repeat center center fixed;}
+    </style>
+{%endblock%}
+{%block body%}
+    <header>
+        
+        
+    </header>
+{%endblock%}D:\Git Projects\Bachelor-Degree-Project\Khronium\static\css\landingPage.css
