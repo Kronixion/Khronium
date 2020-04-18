@@ -1,0 +1,34 @@
+.container{
+    margin: 2% auto;
+}
+
+hr{
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+img{
+    width: inherit;
+    height: inherit;
+    filter: grayscale(100%);
+}
+
+h1,h2{
+    text-align: center;
+    margin: 2% auto;
+}
+
+p{
+    text-align: justify;
+    font-size: 20px;
+}
+
+p::first-letter{
+    font-size: 25px;
+}
+
+p::first-line{
+    text-indent: 20px;
+}

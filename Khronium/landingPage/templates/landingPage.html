@@ -2,14 +2,19 @@
 {%load static%}
 {% block title %}Khronium - Home Page{% endblock %}
 {% block additionalMetaData%}
-    <link rel="stylesheet" href="{% static 'css/landingPage.css' %}" type="text/css">
     <style>
         body{background: linear-gradient(black, black), url("{%static 'images/hourglass.jpg'%}") no-repeat center center fixed;}
     </style>
+    <link rel="stylesheet" href="{% static 'css\landingPage.css' %}" type="text/css">
 {%endblock%}
 {%block body%}
     <header>
-        
-        
+        <h1>Welcome to Khronium</h1>
+        <h3>A simple manager for your time, projects and personal problems</h3>
+        <h4>A smooth application for simple people</h4>
+        <div>
+            <a href=""><button><i class="far fa-play-circle"></i> Get Started</button></a>
+            <a href="{% url 'additionalInfo' %}"><button><i class="fas fa-info"></i> Info</button></a>
+        </div>
     </header>
 {%endblock%}D:\Git Projects\Bachelor-Degree-Project\Khronium\static\css\landingPage.css
