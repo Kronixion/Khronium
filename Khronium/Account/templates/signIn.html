@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}Kronium - Sign In{%endblock%}
+
+{%block additionalMetaData%}
+    <link rel="stylesheet" href="{%static 'css/authentication.css'%}" type="text/css">
+{%endblock%}
+
+{%block body%}
+<form action="{%url 'signIn'%}" method="POST">
+    {%csrf_token%}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Sign In</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="id_username">Username : </label>
+                    {{form.username}}
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="id_password">Password : </label>
+                    {{form.password}}
+                </div>
+            </div>
+        </div>
+        <input type="Submit" value="Submit">
+    </div>
+</form>
+{%endblock%}

@@ -23,14 +23,28 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'additionalInfo' %}"><i class="fas fa-info-circle"></i> Additional Info <span class="sr-only">(current)</span></a>
                 </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fab fa-flipboard"></i> Dashboard</a>
+                </li>
+                {%endif%}
               </ul>
               <ul class="navbar-nav">
+                  {% if user.is_authenticated %}
                   <li class="nav-item">
-                      <a href="#" class="nav-link"><i class="fas fa-sign-in-alt"></i> Sign in</a>
+                    <form action="{%url 'signOut'%}" method="POST">
+                      {%csrf_token%}
+                      <button type="Submit"><i class="fas fa-sign-out-alt"></i> Sign out</button>
+                    </form>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a href="{%url 'signIn'%}" class="nav-link"><i class="fas fa-sign-in-alt"></i> Sign in</a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link"><i class="fas fa-user-plus"></i> Sign up</a>
-                </li>
+                    <a href="{%url 'signUp'%}" class="nav-link"><i class="fas fa-user-plus"></i> Sign up</a>
+                  </li>
+                  {% endif %}
               </ul>
             </div>
           </nav>
