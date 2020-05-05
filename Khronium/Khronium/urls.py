@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-from landingPage.views import landingPage, additionalInfo
+from landingPage.views import landingPage, additionalInfo, dashboard
 from Account.views import signUp, signIn, signOut
 
 urlpatterns = [
@@ -10,5 +10,6 @@ urlpatterns = [
     path('additionalInfo/',additionalInfo,name='additionalInfo'),
     path('signUp/', signUp, name='signUp'),
     path('signIn/',signIn,name='signIn'),
-    path('signOut/',signOut,name='signOut')
+    path('signOut/',signOut,name='signOut'),
+    path('dashboard/',dashboard,name='dashboard'),
 ]

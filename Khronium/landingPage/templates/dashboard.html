@@ -1,0 +1,44 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}Khronium - {{user.username|capfirst}}'s dashboard{%endblock%}
+{%block additionalMetaData%}
+<link rel="stylesheet" href="{%static 'css/dashboard.css'%}" type="text/css">
+{%endblock%}
+{%block body%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>{{user.username|capfirst}}'s Dashboard</h1>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <img src="{%static 'images/Time-Management.jpg'%}" alt="Time Management" class="card-img-top">
+                <div class="card-body">
+                    <a href="#"><h5 class="card-title"><i class="far fa-clock"></i> Time Management</h5></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <img src="{%static 'images/Project-Management.jpg'%}" alt="Project Management" class="card-img-top">
+                <div class="card-body">
+                    <a href="#"><h5 class="card-title"><i class="fas fa-tasks"></i> Project Management</h5></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <img src="{%static 'images/Psychological-management.jpg'%}" alt="Mind and Exhaustion Management" class="card-img-top">
+                <div class="card-body">
+                    <a href="#"><h5 class="card-title"><i class="fas fa-brain"></i> Mind and Exhaustion Management</h5></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

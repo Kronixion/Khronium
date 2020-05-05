@@ -10,3 +10,14 @@
 h1{
     text-align: center;
 }
+
+input[type="submit"]{
+    border: 1px solid black;
+    background:transparent;
+    transition: 0.5s all;
+}
+
+input[type="submit"]:hover{
+    background-color: black;
+    color:white;
+}

@@ -25,7 +25,14 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a href="#" class="nav-link"><i class="fab fa-flipboard"></i> Dashboard</a>
+                    <div class="dropdown">
+                      <a href="{%url 'dashboard'%}" class="nav-link dropdown-btn"><i class="fab fa-flipboard"></i> Dashboard <i class="fas fa-chevron-right"></i></a>
+                      <div class="dropdown-content">
+                          <a href="#" class="nav-link"> <i class="far fa-clock"></i> - Time Management</a>
+                          <a href="#" class="nav-link"> <i class="fas fa-tasks"></i> - Projcet Management</a>
+                          <a href="#" class="nav-link"> <i class="fas fa-brain"></i> - Mind and Exhaustion Management</a>
+                      </div>
+                    </div>
                 </li>
                 {%endif%}
               </ul>
@@ -34,7 +41,7 @@
                   <li class="nav-item">
                     <form action="{%url 'signOut'%}" method="POST">
                       {%csrf_token%}
-                      <button type="Submit"><i class="fas fa-sign-out-alt"></i> Sign out</button>
+                      <button type="Submit" class="signOut nav-link"><i class="fas fa-sign-out-alt"></i> Sign out</button>
                     </form>
                   </li>
                   {% else %}
