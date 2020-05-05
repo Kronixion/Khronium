@@ -12,7 +12,6 @@ hr{
 img{
     width: inherit;
     height: inherit;
-    filter: grayscale(100%);
 }
 
 h1,h2{

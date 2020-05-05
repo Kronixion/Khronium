@@ -31,7 +31,7 @@ def signIn(request):
             print(user)
             if user is not None:
                 login(request, user)
-                return redirect('/')
+                return redirect('/dashboard/')
             else:
                 return render(request, 'signIn.html',{'form':form})
         else: 
