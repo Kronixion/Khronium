@@ -1,0 +1,66 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%}Khronium - MADRS{%endblock%}
+
+{%block additionalMetaData%}
+<link rel="stylesheet" href="{%static 'css/psychologicalForms.css'%}" type="text/css">
+{%endblock%}
+
+{%block body%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Montgomery-Asberg Depression Rating Scale</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <form action="{%url 'madrs'%}" method="POST">
+                {%csrf_token%}
+                <div class="form-group">
+                    <p>1. Try to recall how you have felt during the past week, wether your mood has been changable or much the same all the time.</p>
+                    {{madrsForm.apparentSadness}}
+                </div>
+                <div class="form-group">
+                    <p>2. To what extent you have had feelings of inner tension, uneasiness, anxiety, or vague fear, during the past week?</p>
+                    {{madrsForm.reportedSadness}}
+                </div>
+                <div class="form-group">
+                    <p>3. Have you been tense, during the past week?</p>
+                    {{madrsForm.innerTension}}
+                </div>
+                <div class="form-group">
+                    <p>4. How well do you sleep, for how long, and how good has your sleep been for the past week?</p>
+                    {{madrsForm.reducedSleep}}
+                </div>
+                <div class="form-group">
+                    <p>5. How has your appetite been?</p>
+                    {{madrsForm.reducedAppetite}}
+                </div>
+                <div class="form-group">
+                    <p>6. How is your ability to collect your thoughts, to concentrate on what you are doing?</p>
+                    {{madrsForm.concentrationDifficulties}}
+                </div>
+                <div class="form-group">
+                    <p>7. What is your abbility to get things done?</p>
+                    {{madrsForm.lassitude}}
+                </div>
+                <div class="form-group">
+                    <p>8. How would you asses your interest in your surroundings, in other people and in activities that normall give you pleasure?</p>
+                    {{madrsForm.inabiityToFeel}}
+                </div>
+                <div class="form-group">
+                    <p>9. Did you have any thoughts of guilt, inferiority, remorse or ruin, during this past week?</p>
+                    {{madrsForm.passingThoughts}}
+                </div>
+                <div class="form-group">
+                    <p>10. Have you had thoughts of suicide, and if so, to what extent do you consider it a realistic escape?</p>
+                    {{madrsForm.suicidalThoughts}}
+                </div>
+                <input type="Submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,117 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block title%}Khronium - Psychological Management {%endblock%}
+{%block additionalMetaData%}
+<link rel="stylesheet" href="{%static 'css/pyshcologicalManagement.css'%}" type="text/css">
+{%endblock%}
+
+{%block body%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1><i class="fas fa-brain"></i> - Mind and Exhaustion Management</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="chart-div"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Montgomery Asberg Despression Form</h4>
+                    <p class="card-text">This is the Montgomey Asberg Despression Rating Scale. It will asses your depression level, so be true to yourself and don't answer falsely.</p>
+                    {%if time.now > madrsMostRecentResult or madrsMostRecentResult == None%}
+                        <a href="{%url 'madrs'%}"><button>Complete it Now</button></a>
+                    {%else%}
+                        <button disabled>You can complete it next week on: {{madrsMostRecentResult}}</button>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Karolinska Exhaustion Disorder Form</h4>
+                    <p class="card-text">This is the Karolinska Exhaustion Disorder Rating Scale. It will asses your exhaution level, so be true to yourself and don't answer falsely.</p>
+                    {%if time.now > kedsMostRecentResult or kedsMostRecentResult == None%}
+                        <a href="{%url 'keds'%}"><button>Complete it Now</button></a>
+                    {%else%}
+                        <button disabled>You can complete it next week on: {{kedsMostRecentResult}}</button>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block scripts%}
+<script>
+    var madrsData = "{%for item in madrsResults%}{%if forloop.counter < madrsResults.count%}{{item.score}},{%else%}{{item.score}}{%endif%}{%endfor%}";
+    var kedsData = "{%for item in kedsResults%}{%if forloop.counter < kedsResults.count%}{{item.score}},{%else%}{{item.score}}{%endif%}{%endfor%}";
+    var chartData ={
+  type: 'line',
+  subtitle: {
+    text: "Psychological Management Tracker",
+    'font-weight': "normal"
+  },
+  legend:{
+    
+  },
+  scaleX:{
+    label:{
+        text:"Weeks"
+    }
+  },
+  scaleY:{
+    label:{
+        text:"Score"
+    }
+  },
+  series: [
+  {
+    values: madrsData.split`,`.map(x=>+x),
+    text:"MADRS",
+    'legend-marker': {
+        type: "circle",
+        'background-color': "black",
+        'border-color': "black",
+        'border-width':2
+    },
+    "line-color":"black",
+    "line-width":1,
+    "line-style":"solid",
+    marker: {
+        'background-color':'black',
+        'border-color':'black',
+        'border-width':2
+    }
+  },{
+    values: kedsData.split`,`.map(x=>+x),
+    text:"KEDS",
+    'legend-marker': {
+        type: "circle",
+        'background-color': "white",
+        'border-color': "black",
+        'border-width':2
+    },
+    "line-color":"black",
+    "line-width":1,
+    "line-style":"solid",
+    marker: {
+        'background-color':'white',
+        'border-color':'black',
+        'border-width':2
+    }
+  }
+  ]
+};
+zingchart.render({
+    id: 'chart-div',
+    data: chartData
+});
+</script>
+{%endblock%}

@@ -55,3 +55,11 @@ body{
     border:none;
     background: transparent;
 }
+
+.navbar-text{
+    margin-right: 20px;
+}
+
+#username{
+    color: #5B5B5B;
+}

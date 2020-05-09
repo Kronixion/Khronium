@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'landingPage',
     'Account',
+    'psychologicalManagement',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR,'landingPage/templates'),
                  os.path.join(BASE_DIR,'templates'),
                  os.path.join(BASE_DIR,'Account/templates'),
+                 os.path.join(BASE_DIR,'psychologicalManagement'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {

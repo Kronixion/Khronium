@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%}Khronium - Questionare Result{%endblock%}
+{%block additionalMetaData%}
+<link rel="stylesheet" href="{%static 'css/resultPage.css'%}" type='text/css'>
+{%endblock%}
+{%block body%}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                {%if formType == 'MD'%}
+                    <h1>MADRS - Result</h1>
+                {%else%}
+                    <h1>KEDS - Result</h1>
+                {%endif%}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                {%if formType == 'MD'%}
+                    <h4>The result from the questionare you have compelted is: {{result}}/60</h4>
+                {%else%}
+                    <h4>The result from the questionare you have compelted is: {{result}}/54</h4>
+                {%endif%}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                {%if formType == 'MD'%}
+                    {%if result >= 0 and result <= 6 %}
+                        <p>You fit inside the first quarter which is between 0 and 6. It implies that you are depression free.</p>
+                    {%elif result >= 7 and result <= 19%}
+                        <p>You fit inside the second quarter which is between 7 and 19. This implies that you have a mild case of depression.</p>
+                        <p>Please take some time to talk to your friends or parents about you personal problems.</p>
+                    {%elif result >= 20 and result <= 34%}
+                        <p>You fit inside the third quarter which is between 20 and 34. This implies that you have a moderate case of depression.</p>
+                        <p>Please try to visit a psychologist in order to sort out your problems.</p>
+                    {%elif result >= 35%}
+                        <p>You fit inside the fourth quarter which is between 35 and 60. This implies that you have a mild case of depression.</p>
+                        <p><strong>Please seek medical help.</strong></p>
+                    {%endif%}
+                {%else%}
+                    {%if result >= 0 and result <= 6 %}
+                        <p>You fit inside the first quarter which is between 0 and 6. It implies that you are not exhausted.</p>
+                    {%elif result >= 7 and result <= 19%}
+                        <p>You fit inside the second quarter which is between 7 and 19. This implies that you have a mild case of exhaustion.</p>
+                        <p>Try to take some time off.</p>
+                    {%elif result >= 20 and result <= 34%}
+                        <p>You fit inside the third quarter which is between 20 and 34. This implies that you have a moderate case of ehaustion.</p>
+                        <p>Please try to visit a psychologist in order to sort out your problems.</p>
+                    {%elif result >= 35%}
+                        <p>You fit inside the fourth quarter which is between 35 and 60. This implies that you have a mild case of depression.</p>
+                        <p><strong>Please seek medical help.</strong></p>
+                    {%endif%}
+                {%endif%}
+            </div>
+        </div>
+    </div>
+{%endblock%}

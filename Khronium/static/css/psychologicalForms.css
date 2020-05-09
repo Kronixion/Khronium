@@ -1,0 +1,35 @@
+.container{
+    margin-top: 1%;
+    margin-bottom: 5%;
+}
+
+.row{
+    margin-top:1%;
+}
+
+.col-lg-12{
+    margin-top:2%;
+}
+
+h2{
+    text-align:center;
+}
+
+.container input[type="Submit"]{
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    background-color: transparent;
+    border: 1px solid black;
+    transition: 0.2s all;
+    border-radius: 20px;
+}
+
+.container input[type="Submit"]:hover{
+    background-color: black;
+    color:white;
+}
+
+.container input[type="Submit"]:focus{
+    outline:none;
+}
