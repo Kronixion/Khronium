@@ -1,0 +1,80 @@
+.container{
+    margin-top:3%;
+    margin-bottom:3%;
+}
+
+.row
+{
+    margin-top:20px;
+}
+
+.col-lg-6, .col-xl-3{
+    margin-top: 20px;
+}
+
+.boardCards{
+    width: 286px;
+    height: 194px;
+}
+
+.card{
+    transition: 0.2s all;
+    width: 17rem;
+    margin-left:3%;
+}
+
+.card:hover{
+    box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.6)
+}
+
+.card-body{
+    padding:0px;
+}
+
+.card-body h5{
+    padding: 20px 20px 0px 20px;
+}
+
+.card-text{
+    padding: 0px 20px;
+    margin-bottom: 10px;
+}
+
+.card-body button{
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+    background: transparent;
+    transition: 0.2s all;
+}
+
+.card-body button:hover{
+    color: white;
+    background: black;
+}
+
+.card-body button:focus{
+    outline:none;
+}
+
+h2,h5{
+    text-align:center;
+}
+
+form .form-control{
+    margin: 5px 0px;
+    margin-top: 10px;
+}
+
+#closeAdd{
+    width: 50px;
+    border-radius: 100%;
+}
+
+#boardSign{
+    text-align:left;
+}
+
+#noneMessage{
+    color: rgba(0,0,0,0.5)
+}

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'landingPage',
     'Account',
     'psychologicalManagement',
+    'projectManagement',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ TEMPLATES = [
                  os.path.join(BASE_DIR,'templates'),
                  os.path.join(BASE_DIR,'Account/templates'),
                  os.path.join(BASE_DIR,'psychologicalManagement'),
+                 os.path.join(BASE_DIR,'projectManagement'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
