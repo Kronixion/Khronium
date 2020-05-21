@@ -12,14 +12,10 @@
     margin-top: 20px;
 }
 
-.boardCards{
-    width: 286px;
-    height: 194px;
-}
-
 .card{
     transition: 0.2s all;
     width: 17rem;
+    height: auto;
     margin-left:3%;
 }
 
@@ -41,7 +37,7 @@
 }
 
 .card-body button{
-    width: 100%;
+    width:100%;
     height: 50px;
     border: 1px solid black;
     background: transparent;
@@ -55,6 +51,16 @@
 
 .card-body button:focus{
     outline:none;
+}
+
+.boardButtons{
+    margin-bottom: 2%;
+}
+
+.boardButtons button{
+    width: 20%;
+    border-radius: 100%;
+    margin: 0% 6%;
 }
 
 h2,h5{
@@ -77,4 +83,9 @@ form .form-control{
 
 #noneMessage{
     color: rgba(0,0,0,0.5)
+}
+
+.card-body .closeUpdate{
+    border-radius:100%;
+    width:20%;
 }

@@ -2,14 +2,15 @@
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 0px;
-    background-color: transparent;
-    border: 1px solid rgba(0,0,0,0)
+    background-color: white;
+    border-bottom: 1px solid rgba(0,0,0,0.6);
 }
 
 .nav-link,.navbar-brand{
     padding-left: 5px!important;
     transition: 0.2s all;
     color: black;
+    
 }
 
 .navbar-brand:hover{
@@ -44,7 +45,8 @@ body{
     display: none;
     position: absolute;
     min-width: 260px;
-    background-color: transparent;
+    background-color: white;
+    border-top: 1px solid rgba(0,0,0,0.6);
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }

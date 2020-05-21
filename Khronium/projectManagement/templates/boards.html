@@ -49,10 +49,25 @@
     {%for board in boards%}
         <div class="col-lg-6 col-xl-3">
             <div class="card boardCards">
-                <div class="card-body d-flex flex-column" id="info">
+                <div class="card-body" id="info">
                   <h5 class="card-title">{{board.title}}</h5>
                   <p class="card-text">{{board.description}}</p>
-                  <a href="{%url 'viewBoard' id=board.id%}" class="mt-auto"><button id="addBoard">View Board</button></a>
+                  <div class="boardButtons">
+                    <a href="{%url 'viewBoard' id=board.id%}" class="mt-auto"><button id="addBoard"><i class="fas fa-book-open"></i></button></a>
+                    <button class="updateButton"><i class="fas fa-pen"></i></button>
+                    <button class="deleteButton"><i class="fas fa-trash-alt"></i></button>
+                  </div>
+                </div>
+                <div class="card-body updateBoard">
+                    <h5 class="d-flex justify-content-between align-items-center">Update Board <button class="closeUpdate">X</button></h5>
+                    <input class="form-control" type="text" name="boardTitle" value="{{board.title}}">
+                    <textarea class="form-control" name="boardDescription" cols="40" rows="5">{{board.description}}</textarea>
+                    <button class="update" value="{{board.id}}"><i class="fas fa-pen"></i> - Update</button>
+                </div>
+                <div class="card-body deleteBoard">
+                    <h5>Are you sure?</h5>
+                    <button class="acceptButton" value="{{board.id}}"> <i class="fas fa-trash-alt"></i> - Yes</button>
+                    <button class="refuseButton">X - No</button>
                 </div>
             </div>
         </div>
@@ -64,4 +79,53 @@
 
 {%block scripts%}
 <script src="{%static 'js/boards.js'%}"></script>
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    var csrftoken = getCookie('csrftoken');
+
+    $(".acceptButton").click(function(){
+        let boardId = $(this).attr("value")
+        console.log(boardId)
+        $.post("{% url 'deleteBoard' %}",
+        {
+            'csrfmiddlewaretoken':csrftoken,
+            'boardId':boardId,
+        })
+        $(this).parent().parent().parent().remove()
+    })
+
+    $(".update").click(function(){
+        let boardId = $(this).attr("value")
+        let title = $(this).prev().prev().val()
+        let description = $(this).prev().val()
+        $.post("{% url 'updateBoard' %}",{
+            'csrfmiddlewaretoken':csrftoken,
+            'boardId':boardId,
+            'title':title,
+            'description':description,
+        },
+        function(data){
+            if(data === "1")
+                window.location.href = "{%url 'boards'%}"
+            else{
+                alert("The Data Has not been updated!")
+            }
+        })
+    })
+
+</script>
 {%endblock%}

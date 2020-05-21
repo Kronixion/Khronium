@@ -1,24 +1,97 @@
 {%extends 'base.html'%}
 {%load static%}
 
-{%block additionalData%}
+{%block title%}Khronium - {{board.title}}{%endblock%}
+{%block additionalMetaData%}
 <link rel="stylesheet" href="{%static 'css/projectBoards.css'%}" type="text/css">
 {%endblock%}
 
 {%block body%}
+<h4 id="boardTitle">Board Title : {{board.title}}</h4>
 <div class="board">
-    <div class="list">
-        <button class="addList">Add new list</button>
-    </div>
-    <div class="list">
-        <button class="addList">Add new list</button>
-    </div>
-    <div class="list">
-        <button class="addList">Add new list</button>
+    {%if lists != None%}
+        {%for list in lists%}
+            <div class="list">
+                <h5>{{list.title}}</h5>
+                <button><i class="fas fa-trash-alt"></i></button>
+                <ul class="listItems">
+                </ul>
+                <button class="AddItems" value="{{list.id}}">Add Items</button>
+                <div class="itemInput">
+                    <textarea  cols="42" rows="2"></textarea>
+                    <div class="listButtons">
+                        <button class="addItem">Add Item</button>
+                        <button class="x">X</button>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    {%endif%}
+    <div id="specialList">
+        <h5>Add a new list</h5>
+        <div id="addButton">
+            <button id="addList"><i class="fas fa-plus"></i> - Add</button>
+        </div>
+        <div id="input">
+            <input id="inputListName" type="text" placeholder="List Name">
+            <div class="d-flex justify-content-between">
+                <button id="Add">Add</button>
+                <button id="X">X</button>
+            </div>
+        </div>
     </div>
 </div>
 {%endblock%}
 
 {%block scripts%}
+<script src="{% static 'js/projectBoards.js' %}"></script>
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    $("#Add").click(function(){
+    let listName = $("#inputListName").val()
+    if (listName !== "")
+    {
+        $.post('/boards/{{board.id}}/addList/',
+            {
+                'csrfmiddlewaretoken':csrftoken,
+                'listName':listName,
+            }
+        )
+        $("#specialList").before("<div class=\"list\"><h5>"+listName+"</h5><ul class=\"listItems\"></ul><button class=\"AddItems\" value=\"{{list.id}}\">Add Items</button><div class=\"itemInput\"><textarea  cols=\"36\" rows=\"3\"></textarea><button class=\"addItem\">Add Item</button><button class=\"x\">X</button></div></div>");
+        $(".itemInput").css("display","none")
+    }
 
+    $(".addItem").click(function(){
+        console.log("Works")
+        let itemText = $(this).prev().val()
+        console.log(itemText)
+        let id = $(this).attr("value")
+        console.log(id)
+        if (listName !== undefined)
+        {
+            $.post("boards/{{board.id}}/addItem/",
+                {
+                    'csrfmiddlewaretoken':csrftoken,
+                    'itemText':itemText,
+                    'listId':id,
+                }
+            )
+        }
+    })
+    });
+</script>
 {%endblock%}
