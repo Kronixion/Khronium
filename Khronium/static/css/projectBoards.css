@@ -73,6 +73,18 @@ h5{
     border: 1px solid black;
     transition: 0.2s all;
 }
+.list h5{
+    width:20%;
+    text-align: left;
+    margin: 0px 0px 0.5rem 0px;
+}
+
+
+.list .d-flex button:nth-of-type(1){
+    width:12%;
+    border-radius: 100%;
+    padding: 0px;
+}
 
 .list button:hover{
     color:white;
@@ -88,3 +100,22 @@ h5{
 }
 
 /* Styling the lists */
+
+/* Styling the item lists */
+
+.connectedSortable{
+    list-style-type: none;
+    padding: 1px;
+    margin-top:10px;
+}
+
+.connectedSortable li{
+
+    border: 1px solid rgba(0,0,0,0.5);
+    margin-top:1%;
+}
+
+.card-body button{
+    width:15%;
+}
+/* Styling the item lists */

@@ -4,23 +4,46 @@
 {%block title%}Khronium - {{board.title}}{%endblock%}
 {%block additionalMetaData%}
 <link rel="stylesheet" href="{%static 'css/projectBoards.css'%}" type="text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {%endblock%}
 
 {%block body%}
 <h4 id="boardTitle">Board Title : {{board.title}}</h4>
-<div class="board">
+<div class="board d-flex align-items-start">
     {%if lists != None%}
         {%for list in lists%}
             <div class="list">
-                <h5>{{list.title}}</h5>
-                <button><i class="fas fa-trash-alt"></i></button>
-                <ul class="listItems">
+                <div class="d-flex justify-content-between">
+                    <h5>{{list.title|capfirst}}</h5>
+                    <button class="deleteList" value="{{list.id}}"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <ul id="listItems-{{list.id}}" class="connectedSortable">
+                    {%if items != None%}
+                        {%for item in items%}
+                            {%if list == item.unorderedList%}
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>{{item.text}}</p>
+                                        <button class="editItem"><i class="fas fa-pen"></i></button>
+                                        <button class="deleteItem" value="{{item.id}}"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <div class="editItemTab card-body">
+                                        <textarea  cols="35" rows="3" placeholder="">{{item.text}}</textarea>
+                                        <div class="listButtons">
+                                            <button class="editItemButton" value="{{item.id}}">Edit Item</button>
+                                            <button class="x2">X</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {%endif%}
+                        {%endfor%}
+                    {%endif%}
                 </ul>
-                <button class="AddItems" value="{{list.id}}">Add Items</button>
+                <button class="AddItems">Add Items</button>
                 <div class="itemInput">
-                    <textarea  cols="42" rows="2"></textarea>
+                    <textarea  cols="43" rows="2" placeholder="Enter Text"></textarea>
                     <div class="listButtons">
-                        <button class="addItem">Add Item</button>
+                        <button class="addItem" value="{{list.id}}">Add Item</button>
                         <button class="x">X</button>
                     </div>
                 </div>
@@ -41,9 +64,11 @@
         </div>
     </div>
 </div>
+{{id}}
 {%endblock%}
 
 {%block scripts%}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{% static 'js/projectBoards.js' %}"></script>
 <script>
     function getCookie(name) {
@@ -71,27 +96,88 @@
                 'listName':listName,
             }
         )
-        $("#specialList").before("<div class=\"list\"><h5>"+listName+"</h5><ul class=\"listItems\"></ul><button class=\"AddItems\" value=\"{{list.id}}\">Add Items</button><div class=\"itemInput\"><textarea  cols=\"36\" rows=\"3\"></textarea><button class=\"addItem\">Add Item</button><button class=\"x\">X</button></div></div>");
+        // $("#specialList").before("<div class=\"list\"><div class=\"d-flex justify-content-between\"><h5>"+listName+"</h5><button class=\"deleteList\" value=\"{{list.id}}\"><i class=\"fas fa-trash-alt\"></i></button>
+        //         </div>
+        //         <ul class=\"listItems\">
+        //         </ul>
+        //         <button class=\"AddItems\" value="{{list.id}}">Add Items</button>
+        //         <div class="itemInput">
+        //             <textarea  cols="42" rows="2"></textarea>
+        //             <div class="listButtons">
+        //                 <button class="addItem">Add Item</button>
+        //                 <button class="x">X</button>
+        //             </div>
+        //         </div>
+        //     </div>");
         $(".itemInput").css("display","none")
     }
-
-    $(".addItem").click(function(){
-        console.log("Works")
-        let itemText = $(this).prev().val()
-        console.log(itemText)
-        let id = $(this).attr("value")
-        console.log(id)
-        if (listName !== undefined)
-        {
-            $.post("boards/{{board.id}}/addItem/",
-                {
-                    'csrfmiddlewaretoken':csrftoken,
-                    'itemText':itemText,
-                    'listId':id,
-                }
-            )
-        }
     })
+    $(document).on("click",".deleteList",function(){
+        let listId = $(this).attr("value")
+        $.post("/boards/{{board.id}}/deleteList/",{
+            'csrfmiddlewaretoken':csrftoken,
+            'listId':listId,
+        });
+        $(this).parent().parent().remove()
     });
+
+    $(document).on("click",".addItem",function(){
+        let listId = $(this).attr("value");
+        let itemText = $(this).parent().prev().val()
+        $.post("/boards/{{board.id}}/addItem/",{
+            'csrfmiddlewaretoken':csrftoken,
+            'listId':listId,
+            'itemText':itemText,
+        });
+    //     $(this).parent().parent().prev().prev().append("<div class=\"card\">
+    //                                 <div class=\"card-body\">
+    //                                     <p>{{item.text}}</p>
+    //                                     <button class=\"editItem\"><i class=\"fas fa-pen\"></i></button>
+    //                                     <button class=\"deleteItem\" value=\"{{item.id}}\"><i class=\"fas fa-trash-alt\"></i></button>
+    //                                 </div>
+    //                                 <div class=\"editItemTab card-body\">
+    //                                     <textarea  cols=\"35\" rows=\"3\">{{item.text}}</textarea>
+    //                                     <div class=\"listButtons\">
+    //                                         <button class=\"editItemButton\" value=\"{{item.id}}">Edit Item</button>
+    //                                         <button class="x2">X</button>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>")
+    // });
+
+    $(document).on("click",".editItemButton",function(){
+        let itemId = $(this).attr("value");
+        let editedText = $(this).parent().prev().val();
+        console.log(itemId)
+        console.log(editedText)
+        $.post("/boards/{{board.id}}/updateItem/",{
+            'csrfmiddlewaretoken':csrftoken,
+            'itemId':itemId,
+            'editedText':editedText,
+        });
+        let editTab = $(this).parent().parent();
+        editTab.slideUp(200,function(){
+            $(this).css("display","none");
+            $(this).prev().children(":first").text(editedText);
+            $(this).prev().slideDown(200,function(){
+                $(this).css("display","block");
+            });
+        });
+    });
+
+    $(document).on("click",".deleteItem",function(){
+        let itemId = $(this).attr("value")
+        $.post("/boards/{{board.id}}/deleteItem/",{
+            'csrfmiddlewaretoken':csrftoken,
+            'itemId':itemId,
+        });
+        $(this).parent().remove()
+    });
+
+    $( function() {
+    $( "{%if lists != None %}{%for list in lists%}{%if forloop.last%}#listItems-{{list.id}}{%else%}#listItems-{{list.id}},{%endif%}{%endfor%}{%endif%}" ).sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+    } );
 </script>
 {%endblock%}

@@ -4,7 +4,7 @@ from django.urls import path
 from landingPage.views import landingPage, additionalInfo, dashboard
 from Account.views import signUp, signIn, signOut
 from psychologicalManagement.views import psychologicalDashboard, madrs, keds
-from projectManagement.views import boards, addBoard, updateBoard, deleteBoard, viewBoard, addList, addItem
+from projectManagement.views import boards, addBoard, updateBoard, deleteBoard, viewBoard, addList, deleteList, addItem, updateItem, deleteItem
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +23,8 @@ urlpatterns = [
     path('boards/delete/',deleteBoard,name="deleteBoard"),
     path('boards/<int:id>/',viewBoard,name="viewBoard"),
     path('boards/<int:id>/addList/',addList,name="addList"),
-    path('boards/<int:id>/addItem/',addItem,name="addItem"),
+    path('boards/<int:id>/deleteList/',deleteList,name="deleteList"),
+    path('boards/<int:id>/addItem/',addItem,name="addItem"),    
+    path('boards/<int:id>/updateItem/',updateItem,name="updateItem"),
+    path('boards/<int:id>/deleteItem/',deleteItem,name="deleteItem"),
 ]

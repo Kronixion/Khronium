@@ -36,12 +36,12 @@ def addBoard(request):
     else:
         return redirect('/boards/')
 
+@login_required
 def updateBoard(request):
     if request.method == "POST":
         title = request.POST['title']
         description = request.POST['description']
         board = ProjectBoard.objects.get(id=request.POST['boardId'])
-        print(board)
         board.title = title
         board.description = description
         board.save()
@@ -49,6 +49,7 @@ def updateBoard(request):
     else:
         return HttpResopnse("0")
 
+@login_required
 def deleteBoard(request):
     print(request.POST)
     if request.method == "POST":
@@ -67,8 +68,12 @@ def viewBoard(request,id):
     except UnorderedList.DoesNotExist:
         unorderedList = None
 
+    try:
+        itemObjects = Item.objects.all()
+    except itemObjects.DoesNotExist:
+        itemObjects = None
     
-    return render(request,'projectBoards.html',{'board':board,'lists':unorderedList})
+    return render(request,'projectBoards.html',{'board':board,'lists':unorderedList,'items':itemObjects})
 
 @login_required
 def addList(request,id):
@@ -80,11 +85,39 @@ def addList(request,id):
     else:
         return redirect('viewBoard',id=id)
 
+def deleteList(request,id):
+    if request.method == 'POST':
+        unorderedList = UnorderedList.objects.get(id= request.POST['listId'])
+        unorderedList.delete()
+        return redirect('viewBoard',id=id)
+    else:
+        return redirect('viewBoard',id=id)
+
 @login_required
 def addItem(request,id):
     if request.method=="POST":
-        unorderedList = UnorderedList.objects.get(id=request.POST[id])
+        unorderedList = UnorderedList.objects.get(id=request.POST['listId'])
         item = Item(unorderedList=unorderedList, text=request.POST['itemText'])
+        item.save()
+        return redirect('viewBoard',id=id)
+    else:
+        return redirect('viewBoard',id=id)
+
+@login_required
+def updateItem(request,id):
+    if request.method == "POST":
+        item = Item.objects.get(id=request.POST['itemId'])
+        item.text = request.POST['editedText']
+        item.save()
+        return redirect('viewBoard',id=id)
+    else:
+        return redirect('viewBoard',id=id)
+
+@login_required
+def deleteItem(request,id):
+    if request.method == "POST":
+        item = Item.objects.get(id=request.POST['itemId'])
+        item.delete()
         return redirect('viewBoard',id=id)
     else:
         return redirect('viewBoard',id=id)
