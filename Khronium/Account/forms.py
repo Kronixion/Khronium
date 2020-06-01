@@ -23,5 +23,8 @@ class AccountForm(forms.ModelForm):
         fields = ('age',)
 
 class AccountSignInForm(forms.Form):
-    username = forms.CharField(max_length=150, widget=forms.TextInput(attrs={'class':'form-control fadeIn first','placeholder':'Username'}))
-    password = forms.CharField(widget = forms.PasswordInput(attrs={'class':'form-control fadeIn second','placeholder':'Password'}))
+    username = forms.CharField(required=True,max_length=150, widget=forms.TextInput(attrs={'class':'form-control fadeIn first','placeholder':'Username'}))
+    password = forms.CharField(required=True,widget = forms.PasswordInput(attrs={'class':'form-control fadeIn second','placeholder':'Password'}))
+
+class ResetPassword(forms.Form):
+    email = forms.CharField(required=True, widget = forms.TextInput(attrs={'class':'form-control','placeholder':'E-mail'}))

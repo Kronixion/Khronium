@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.urls import path
 
 from landingPage.views import landingPage, additionalInfo, dashboard
-from Account.views import signUp, signIn, signOut
+from Account.views import signUp, signIn, signOut, resetPassword
 from psychologicalManagement.views import psychologicalDashboard, madrs, keds
-from projectManagement.views import boards, addBoard, updateBoard, deleteBoard, viewBoard, addList, deleteList, addItem, updateItem, deleteItem
+from projectManagement.views import boards, addBoard, updateBoard, deleteBoard, viewBoard, addList, deleteList, addItem, updateItem, deleteItem, moveItem
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('signUp/', signUp, name='signUp'),
     path('signIn/',signIn,name='signIn'),
     path('signOut/',signOut,name='signOut'),
+    path('resetPassword/',resetPassword,name='resetPassword'),
     path('dashboard/',dashboard,name='dashboard'),
     path('psychologicalDashboard/',psychologicalDashboard, name="psychologicalDashboard"),
     path('madrs/',madrs,name='madrs'),
@@ -27,4 +28,5 @@ urlpatterns = [
     path('boards/<int:id>/addItem/',addItem,name="addItem"),    
     path('boards/<int:id>/updateItem/',updateItem,name="updateItem"),
     path('boards/<int:id>/deleteItem/',deleteItem,name="deleteItem"),
+    path('boards/<int:id>/moveItem/',moveItem,name="moveItem"),
 ]

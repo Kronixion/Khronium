@@ -105,7 +105,9 @@ h5{
 
 .connectedSortable{
     list-style-type: none;
-    padding: 1px;
+    padding:0px;
+    padding-top: 1px;
+    padding-bottom: 3px;
     margin-top:10px;
 }
 

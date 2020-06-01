@@ -81,7 +81,7 @@ def addList(request,id):
     if request.method == 'POST' and request.POST['listName'] != "":
         unorderedList = UnorderedList(dashboard=board, title=request.POST['listName'])
         unorderedList.save()
-        return redirect('viewBoard',id=id)
+        return HttpResponse(unorderedList.id)
     else:
         return redirect('viewBoard',id=id)
 
@@ -99,7 +99,7 @@ def addItem(request,id):
         unorderedList = UnorderedList.objects.get(id=request.POST['listId'])
         item = Item(unorderedList=unorderedList, text=request.POST['itemText'])
         item.save()
-        return redirect('viewBoard',id=id)
+        return HttpResponse(item.id)
     else:
         return redirect('viewBoard',id=id)
 
@@ -118,6 +118,16 @@ def deleteItem(request,id):
     if request.method == "POST":
         item = Item.objects.get(id=request.POST['itemId'])
         item.delete()
+        return redirect('viewBoard',id=id)
+    else:
+        return redirect('viewBoard',id=id)
+
+def moveItem(request,id):
+    if request.method == "POST":
+        uList =  UnorderedList.objects.get(id=request.POST['updateId'])
+        item = Item.objects.get(id=request.POST['itemId'])
+        item.unorderedList = uList
+        item.save()
         return redirect('viewBoard',id=id)
     else:
         return redirect('viewBoard',id=id)

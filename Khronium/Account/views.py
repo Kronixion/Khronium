@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Account
-from .forms import AccountForm, ExtendedUserCreationForm, AccountSignInForm
+from .forms import AccountForm, ExtendedUserCreationForm, AccountSignInForm, ResetPassword
 from django.contrib.auth import authenticate, login, logout
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.crypto import get_random_string
 
 def signUp(request):
     if request.method == "POST":
@@ -43,3 +46,16 @@ def signIn(request):
 def signOut(request):
     logout(request)
     return redirect('/')
+
+def resetPassword(request):
+    if request.method == "POST":
+        account = Account.objects.get(user.email = request.POST['email'])
+        account.token = get_random_string(length=64)
+        subject = 'Khronium - Reset Password'
+        html_message = render_to_string('email_template')
+    else:
+        form = ResetPassword()
+        return render(request,"resetPassword.html",{"form":form})
+
+def resetPasswordConfirm(request):
+    pass
