@@ -28,3 +28,7 @@ class AccountSignInForm(forms.Form):
 
 class ResetPassword(forms.Form):
     email = forms.CharField(required=True, widget = forms.TextInput(attrs={'class':'form-control','placeholder':'E-mail'}))
+
+class ResetPasswordConfirmation(forms.Form):
+    password = forms.CharField(required=True, widget = forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}))
+    passwordConfirm = forms.CharField(required=True,widget = forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password Confirmation'}))

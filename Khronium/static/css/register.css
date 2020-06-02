@@ -152,6 +152,11 @@ input::placeholder{
     -moz-animation-delay: 1.6s;
     animation-delay: 1.6s;
   }
+  .fadeIn.ninth {
+    -webkit-animation-delay: 1.8s;
+    -moz-animation-delay: 1.8s;
+    animation-delay: 1.8s;
+  }
   
   /* simple CSS3 fade-in animation */
   .underlineHover:after {
@@ -172,3 +177,6 @@ input::placeholder{
   .underlineHover:hover:after{
     width: 100%;
   }
+.form-group ul li{
+  color: red;
+}

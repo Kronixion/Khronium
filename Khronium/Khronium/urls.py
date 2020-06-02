@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from landingPage.views import landingPage, additionalInfo, dashboard
-from Account.views import signUp, signIn, signOut, resetPassword
+from Account.views import signUp, signIn, signOut, resetPassword, resetPasswordConfirm
 from psychologicalManagement.views import psychologicalDashboard, madrs, keds
 from projectManagement.views import boards, addBoard, updateBoard, deleteBoard, viewBoard, addList, deleteList, addItem, updateItem, deleteItem, moveItem
 
@@ -14,6 +14,7 @@ urlpatterns = [
     path('signIn/',signIn,name='signIn'),
     path('signOut/',signOut,name='signOut'),
     path('resetPassword/',resetPassword,name='resetPassword'),
+    path('resetPasswordConfirm/<str:token>/',resetPasswordConfirm,name='resetPasswordConfirm'),
     path('dashboard/',dashboard,name='dashboard'),
     path('psychologicalDashboard/',psychologicalDashboard, name="psychologicalDashboard"),
     path('madrs/',madrs,name='madrs'),

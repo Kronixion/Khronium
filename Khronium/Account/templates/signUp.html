@@ -58,9 +58,21 @@
                 </div>
             </div>
         </div>
-        <input class="fadeIn eight"type="Submit" value="Submit">
+        <div class="col-lg-12 d-flex justify-conent-center fadeIn eight">
+            <div class="form-group">
+                {{errors}}
+            </div>
+        </div>
+        {%if message != None%}
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <p class="fadeIn eight" style="color:red;text-align:center;">{{message}}</p> 
+                </div>
+            </div>
+            <input class="fadeIn ninth"type="Submit" value="Submit">
+        {%else%}
+            <input class="fadeIn ninth"type="Submit" value="Submit">
+        {%endif%}
     </div>
-    
-    
 </form>
 {%endblock%}
