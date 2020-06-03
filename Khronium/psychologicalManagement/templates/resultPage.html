@@ -48,9 +48,9 @@
                         <p>Try to take some time off.</p>
                     {%elif result >= 20 and result <= 34%}
                         <p>You fit inside the third quarter which is between 20 and 34. This implies that you have a moderate case of ehaustion.</p>
-                        <p>Please try to visit a psychologist in order to sort out your problems.</p>
+                        <p>Please try to visit a psychologist in order to sort out your exhaustion problems.</p>
                     {%elif result >= 35%}
-                        <p>You fit inside the fourth quarter which is between 35 and 60. This implies that you have a mild case of depression.</p>
+                        <p>You fit inside the fourth quarter which is between 35 and 60. This implies that you have a severe case of exhaustion.</p>
                         <p><strong>Please seek medical help.</strong></p>
                     {%endif%}
                 {%endif%}
@@ -58,7 +58,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <a href="{%url 'psychologicalDashboard'%}"><button> < Go Back </button></a>
+                <a href="{%url 'psychologicalDashboard'%}"><button>Go back to the dashboard</button></a>
             </div>
         </div>
     </div>

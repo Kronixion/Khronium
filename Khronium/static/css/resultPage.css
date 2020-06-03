@@ -17,3 +17,20 @@ p{
     text-align: center;
 }
 
+.row{
+    margin-bottom: 2%;
+}
+
+.col-lg-12 button{
+    background-color: transparent;
+    border: 1px solid black;
+    width: 100%;
+    font-size: 20px;
+    height:50px;
+    transition: 0.2s all;
+}
+
+.col-lg-12 button:hover{
+    color:white;
+    background-color: black;
+}

@@ -47,7 +47,7 @@ def madrs(request):
 def keds(request):
     account = Account.objects.get(user=request.user)
     kedsMostRecentResult = PsychologicalModel.objects.filter(account=account, formType='KD').last()
-    if kedsMostRecentResult == None or date.today() > kedsMostRecentResult.dateTaken+timedelta(days=7):
+    if kedsMostRecentResult == None or date.today() < kedsMostRecentResult.dateTaken+timedelta(days=7):
         if request.method == "POST":
             formScore = 0
             for value in request.POST.values():
