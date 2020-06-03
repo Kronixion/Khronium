@@ -7,6 +7,7 @@ from django.core import mail
 from django.template.loader import render_to_string
 from django.utils.crypto import get_random_string
 from django.utils.html import strip_tags
+from datetime import timedelta, datetime
 
 def signUp(request):
     userForm = ExtendedUserCreationForm()
@@ -38,25 +39,51 @@ def signUp(request):
         return  render(request,'signUp.html',context)
 
 def signIn(request):
+    form = AccountSignInForm(request.POST)
     if request.method == 'POST':
-        form = AccountSignInForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(username=username, password=password)
             if user is not None:
                 account = Account.objects.get(user=user)
+                if account.lockoutDateTime is not None:
+                    unlockTime = account.lockoutDateTime + timedelta(minutes=5)
+                    unlockTime = unlockTime.replace(tzinfo=None)
+                    print(unlockTime)
+                    print(datetime.now())
+                    if datetime.now() < unlockTime:
+                        message = 'Yout account is locked, due to too many login attempts!'
+                        return render(request, 'signIn.html',{'form':form,'message':message})
+                    else:
+                        account.loginAttempt = 0
+                        account.lockoutDateTime = None
                 account.token=''
                 account.save()
                 login(request, user)
                 return redirect('/dashboard/')
+                
             else:
-                message = 'Wrong username or password!'
-                return render(request, 'signIn.html',{'form':form,'message':message})
+                try:
+                    user = User.objects.get(username=username)
+                except User.DoesNotExist:
+                    user = None
+
+                if user is not None:
+                    user = User.objects.get(username=username)
+                    account = Account.objects.get(user=user)
+                    account.loginAttempt += 1
+                    if account.loginAttempt == 5:
+                        account.lockoutDateTime = datetime.now()
+                    account.save()
+                    message = 'Wrong password!'
+                    return render(request, 'signIn.html',{'form':form,'message':message})
+                else:
+                    message = 'Wrong username or password!'
+                    return render(request, 'signIn.html',{'form':form,'message':message})
         else: 
             return render(request, 'signIn.html',{'form':form})
     else:
-        form = AccountSignInForm() 
         return render(request, 'signIn.html',{'form':form})
 
 def signOut(request):

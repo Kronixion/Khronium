@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Montgomery Asberg Despression Form</h4>
                     <p class="card-text">This is the Montgomey Asberg Despression Rating Scale. It will asses your depression level, so be true to yourself and don't answer falsely.</p>
-                    {%if time.now > madrsMostRecentResult or madrsMostRecentResult == None%}
+                    {%if currentDate >= madrsMostRecentResult or madrsMostRecentResult == None%}
                         <a href="{%url 'madrs'%}"><button>Complete it Now</button></a>
                     {%else%}
                         <button disabled>You can complete it next week on: {{madrsMostRecentResult}}</button>
@@ -36,7 +36,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Karolinska Exhaustion Disorder Form</h4>
                     <p class="card-text">This is the Karolinska Exhaustion Disorder Rating Scale. It will asses your exhaution level, so be true to yourself and don't answer falsely.</p>
-                    {%if time.now > kedsMostRecentResult or kedsMostRecentResult == None%}
+                    {%if currentDate >= kedsMostRecentResult or kedsMostRecentResult == None%}
                         <a href="{%url 'keds'%}"><button>Complete it Now</button></a>
                     {%else%}
                         <button disabled>You can complete it next week on: {{kedsMostRecentResult}}</button>

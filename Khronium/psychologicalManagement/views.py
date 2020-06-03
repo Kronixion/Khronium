@@ -18,7 +18,11 @@ def psychologicalDashboard(request):
         kedsMostRecentResult = None
     else:
         kedsMostRecentResult = kedsResults.last().dateTaken+timedelta(days=7)
-    return render(request,'psychologicalManagement.html',{'kedsResults':kedsResults,'madrsResults':madrsResults,'madrsMostRecentResult':madrsMostRecentResult,'kedsMostRecentResult':kedsMostRecentResult})
+    print(madrsMostRecentResult)
+    print(kedsMostRecentResult)
+    currentDate = date.today()
+    print(currentDate)
+    return render(request,'psychologicalManagement.html',{'kedsResults':kedsResults,'madrsResults':madrsResults,'madrsMostRecentResult':madrsMostRecentResult,'kedsMostRecentResult':kedsMostRecentResult,'currentDate':currentDate})
 
 @login_required
 def madrs(request):
