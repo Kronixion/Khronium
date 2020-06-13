@@ -1,0 +1,399 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block title%}Khronium - Time Management{%endblock%}
+{%block additionalMetaData%}
+<link rel="stylesheet" href="{%static 'css/timeManagement.css'%}">
+<link rel="stylesheet" href="{%static 'css/timeManagementSideBar.css'%}">
+{%endblock%}
+
+{%block body%}
+<!-- Constructing the sidenav for adding DailyLists and filtering them -->
+<button id="sideNavButton"><i class="fas fa-bars"></i></button>
+
+<div id="sideNav">
+    <div class="d-flex justify-content-end">
+        <button id="closeSideNav">X</button>
+    </div>
+    <h4>Options</h4>
+    <div id="options">
+        <div class="addDailyList dropdownDiv">
+            <button class="dropdownButton">Add Day</button>
+            <div class="dropdown">
+                <div class="form-group">
+                    <input placeholder="Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="listDate">
+                    <button id="addDailyList"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="filterDailyLists dropdownDiv">
+            <button class="dropdownButton">Filter Days</button>
+            <div class="dropdown">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Start Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                    <input type="text" class="form-control" placeholder="End Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+                    <button id="filter"><i class="fas fa-filter"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- sideNav -->
+
+<!-- Move Item OVerlay -->
+
+<div id="windowOverlay2">
+    <div class="container">
+        <div class="col-xl-12">
+            <div class="projectTasks2">
+                <h3><strong>Select a list: </strong></h3>
+                {%for board in projectBoards%}
+                    <div class="dropdown">
+                        <button class="dropDown">Project - {{board.title|title}}</button>
+                        <ul class="list">
+                            {%for list in unorderedLists%}
+                                {%if list.dashboard == board%}
+                                <li>
+                                <div class="dropdown">
+                                    <button class="projectList" ><i class="fas fa-angle-double-right"></i> List - {{list.title}}</button>
+                                </li>
+                                {%endif%}
+                            {%endfor%}
+                        </ul>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Move Item OVerlay -->
+
+<!-- Task Adder Overlay -->
+<div id="windowOverlay" class="">
+    <div class="container addTaskContainer">
+        <div class="col-lg-12">
+            <div class="addTaskTop d-flex justify-content-between align-items-center">
+                <h3><i class="fas fa-thumbtack"></i> - Options</h3> 
+                <button id="closeOverlay"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="card">
+                <div class="card-body" id="addTaskOptions">
+                    <button id="activateSimpleTaskSlide">Add Task</button>
+                    <button id="activateProjectTaskSlide">Add Project Task</button>
+                </div>
+                <div class="card-body addSimpleTask">
+                    <input type="text" class="form-control" placeholder="Start Time" onfocus="(this.type='time')" onblur="(this.type='text')">
+                    <input type="text" class="form-control" placeholder="End Time" onfocus="(this.type='time')" onblur="(this.type='text')">
+                    <textarea id="" cols="34" rows="10"placeholder="Description"></textarea>
+                    <button id="submitSimpleTask">Submit Task</button>
+                    <button id="backSimpleTaskSlide">Go Back</button>
+                </div>
+                <div class="card-body addProjectTask">
+                    <input id="projectTaskStartTime" type="text" class="form-control" placeholder="Start Time" onfocus="(this.type='time')" onblur="(this.type='text')">
+                    <input id="projectTaskEndTime" type="text" class="form-control" placeholder="End Time" onfocus="(this.type='time')" onblur="(this.type='text')">
+                    <div class="projectTasks">
+                        <h6><strong>Submit by selecting a task : </strong></h6>
+                        {%for board in projectBoards%}
+                            <div class="dropdown">
+                                <button class="dropDown">Project - {{board.title|title}}</button>
+                                <ul class="list">
+                                    {%for list in unorderedLists%}
+                                        {%if list.dashboard == board%}
+                                        <li>
+                                        <div class="dropdown">
+                                            <button class="dropDown projectList"><i class="fas fa-angle-double-right"></i> List - {{list.title}}</button>
+                                            <ul class="list">
+                                                {%for item in items%}
+                                                    {%if item.unorderedList == list%}
+                                                        <li><button class="projectItem" value="{{item.id}}"><i class="fas fa-angle-double-right"></i>  Item - {{item.text}}</button></li>
+                                                    {%endif%}
+                                                {%endfor%}
+                                            </ul>
+                                        </li>
+                                        {%endif%}
+                                    {%endfor%}
+                                </ul>
+                            </div>
+                        {%endfor%}
+                    </div>
+                    <button id="backProjectTaskSlide">Go Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Task Adder -->
+
+<!-- DailyLists -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12">
+            <h1 id="pageTitle"><i class="far fa-clock"></i> - Time Management</h1>
+        </div>
+    </div>
+    <div class="row" id="rowLists">
+    {% for list in dailyLists %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="list-top d-flex justify-content-between">
+                        <h5 class="card-title listDate">{{list.date}}</h5>
+                        <button class="deleteDailyList" value="{{list.id}}"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    {%for event in events%}
+                        {%if list == event.dailyList%}
+                                <div class="eventItem">
+                                    <h6><em>{{event.startTime}} - {{event.endTime}}</em></h6> 
+                                    <p class="eventDescription">{{event.description}}</p>
+                                    <button class="updateTask" value="{{event.id}}"><i class="fas fa-pen"></i></button>
+                                    <button class="deleteTask" value="{{event.id}}"><i class="fas fa-trash-alt"></i></button>
+                                    {%if event.itemId != -1%}
+                                    <button class="completeTask" value="{{event.id}}"><i class="fas fa-check"></i></button>
+                                    {%endif%}
+                                </div>
+                        {%endif%}
+                    {%endfor%}
+                    <button class="addEvent" value="{{list.id}}"><i class="fas fa-thumbtack"></i> - Add Task</button>
+                </div>
+            </div>
+        </div>
+    {%empty%}
+        <div class="col-xl-12" id="noLists">
+            <h1 id="zeroLists">There are no daily lists available. Please press to add <i class="fas fa-bars"></i> a new one.</h1>
+        </div>
+    {%endfor%}
+    </div>
+</div>
+
+<!-- DailyLists -->
+
+
+{%endblock%}
+
+{%block scripts%}
+<script src="{%static 'js/timeManagement.js'%}"></script>
+<script>
+    $(".dropDown").click(function(){
+            $(this).next().slideToggle(function(){
+            });
+        });
+    // get csrf token
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+    var csrftoken = getCookie('csrftoken');
+
+    //Add Daily List
+    $(document).on("click","#addDailyList",function(){
+        let date = $(this).prev().val();
+        if (date !== ""){
+            $.post("{%url 'addDailyList'%}",{
+                "csrfmiddlewaretoken":csrftoken,
+                "date":date,
+            }).done(function(data){
+                if(data !== "-1")
+                {
+                    if($("#noLists").length){
+                        $("#noLists").remove()
+                    }
+                    $("#rowLists").append("<div class=\"col-lg-3 col-md-6\"><div class=\"card\"><div class=\"card-body\"><div class=\"list-top d-flex justify-content-between\"><h5 class=\"card-title\">"+date+"</h5><button class=\"deleteDailyList\" value=\""+data+"\"><i class=\"fas fa-trash-alt\"></i></button></div><button class=\"addEvent\" value=\""+data+"\"><i class=\"fas fa-thumbtack\"></i> - Add Task</button></div></div></div>")
+                }
+                else{
+                    alert("List allready exists !!!")
+                }
+            });
+        }else{
+            alert("Date is empty");
+        }
+    });
+
+    //Remove Daily List
+    $(document).on("click",".deleteDailyList",function(){
+        let id = $(this).attr("value");
+        let dailyList = $(this);
+        $.post("{%url 'removeDailyList'%}",{
+                "csrfmiddlewaretoken":csrftoken,
+                "id":id,
+            }).done(function(data){
+                console.log(data)
+                dailyList.parent().parent().parent().parent().remove()
+            });
+    });
+
+    
+    //Filter Daily List
+    $(document).on("click","#filter",function(){
+        let startDate = $(this).prev().prev().val()
+        let endDate = $(this).prev().val()
+        let fDate = new Date(startDate).setHours(0)
+        let eDate = new Date(endDate).setHours(0)
+        if (isNaN(eDate) && isNaN(fDate))
+        {
+            $(".listDate").each(function(i,obs){0
+                let list = $(this).parent().parent().parent().parent();
+                list.css("display","block")
+            })
+        }else if(isNaN(eDate) || isNaN(fDate)){
+            alert("Yout didn't complete the start date or the end date !!!")
+        }
+        else if(eDate < fDate){
+            alert("End Date is smaller than Start Date !!!")
+        }
+        else{
+            $(".listDate").each(function(i,obs){
+                let date = new Date($(this).text());
+                let list = $(this).parent().parent().parent().parent()
+                if (date.valueOf()>=fDate && date.valueOf()<=eDate)
+                {
+                    list.css("display","block")
+                }
+                else{
+                    list.css("display","None")
+                }
+            })
+        }
+    });
+
+    //add Tasks
+    var listId = 0
+    $(document).on("click",".addEvent",function(){
+        $("#windowOverlay").css("display","block");
+        listId = $(this).attr("value")
+    });
+    $(document).on("click","#submitSimpleTask",function(){
+        let startTime = $(this).prev().prev().prev().val()
+        let endTime = $(this).prev().prev().val()
+        let description = $(this).prev().val()
+        $.post("{%url 'addEvent'%}",{
+                "csrfmiddlewaretoken":csrftoken,
+                "listId":listId,
+                "startTime":startTime,
+                "endTime":endTime,
+                "description":description,
+                "itemId":-1,
+            }).done(function(data){
+                $("#windowOverlay").css("display","none");
+                $(".addEvent[value=\""+listId+"\"]").before("<div class=\"eventItem\"><h6><em>"+startTime+" - "+endTime+"</em></h6> <p class=\"eventDescription\">"+description+"</p><button class=\"updateTask\" value=\""+data+"\"><i class=\"fas fa-pen\"></i></button> <button class=\"deleteTask\" value=\""+data+"\"><i class=\"fas fa-trash-alt\"></i></button></div>")
+            });
+    });
+    $(document).on("click",".projectItem",function(){
+        let itemId = $(this).attr("value")
+        let text = $(this).text().split("-")[1].replace(" ","")
+        let startTime = $("#projectTaskStartTime").val()
+        let endTime = $("#projectTaskEndTime").val()
+        console.log(itemId)
+        $.post("{%url 'addEvent'%}",{
+                "csrfmiddlewaretoken":csrftoken,
+                "listId":listId,
+                "startTime":startTime,
+                "endTime":endTime,
+                "description":text,
+                "itemId":itemId,
+            }).done(function(data){
+                $("#windowOverlay").css("display","none");
+                $(".addEvent[value=\""+listId+"\"]").before("<div class=\"eventItem\"><h6><em>"+startTime+" - "+endTime+"</em></h6> <p class=\"eventDescription\">"+text+"</p><button class=\"updateTask\" value=\""+data+"\"><i class=\"fas fa-pen\"></i></button> <button class=\"deleteTask\" value=\""+data+"\"><i class=\"fas fa-trash-alt\"></i></button> <button class=\"completeTask\" value=\""+data+"\"><i class=\"fas fa-check\"></i></button></div>")
+        });
+    });
+
+    //delete Tasks deleteTask
+    $(document).on("click",".deleteTask",function(){
+        let eventId = $(this).attr("value")
+        let deleteSelector = $(this)
+        $.post("{%url 'removeEvent'%}",{
+            "csrfmiddlewaretoken":csrftoken,
+            "eventId":eventId,
+        }).done(function(data){
+            deleteSelector.parent().remove()
+        });
+    });
+    //update Tasks
+    $(document).on("click",".eventDescription",function(){
+        $(this).replaceWith(function(){
+            return '<textarea class="eventDescriptionUpdate form-control" rows="4" col="15">' + $(this).text() + '</textarea>'
+        })
+    })
+
+    $(document).on("click",".updateTask",function(){
+        let description = $(this).prev().val()
+        let eventId = $(this).attr("value")
+        let currentUpdateButton=$(this)
+        console.log(description)
+        if (description !== ""){
+            $.post("{%url 'updateEvent'%}",{
+            "csrfmiddlewaretoken":csrftoken,
+            "eventId":eventId,
+            "description":description,
+            }).done(function(data){
+                currentUpdateButton.prev().replaceWith('<p class="eventDescription">'+ description + '</p>')
+            })
+        }
+    })
+
+    // move project task
+    let projectTask = 0
+    $(document).on("click",".completeTask",function(){
+        $("#windowOverlay2").css("display","block");
+        projectTask = $(this).attr("value");
+    })
+
+    // close overlay
+    $("#closeOverlay").click(function(){
+        $("#windowOverlay").css("display","none");
+    });
+
+
+    //Effects
+    $(document).on("click","#activateSimpleTaskSlide",function(){
+        $(this).parent().slideUp(200,function(){
+            $(this).css("display","none");
+            $(this).next().slideDown(200,function(){
+                $(this).css("display","block")
+            });
+        });
+    });
+
+    $(document).on("click","#backSimpleTaskSlide",function(){
+        let text = $(this).parent();
+        text.slideUp(200, function(){
+            $(this).css("display","none")
+            $(this).prev().slideDown(200,function(){
+                $(this).css("display","block")
+            })
+        })
+    })
+
+    $(document).on("click","#activateProjectTaskSlide",function(){
+        $(this).parent().slideUp(200,function(){
+            $(this).css("display","none");
+            $(this).next().next().slideDown(200,function(){
+                $(this).next().css("display","block")
+            });
+        });
+    });
+
+    $(document).on("click","#backProjectTaskSlide",function(){
+        let text = $(this).parent();
+        text.slideUp(200, function(){
+            $(this).css("display","none")
+            $(this).prev().prev().slideDown(200,function(){
+                $(this).css("display","block")
+            })
+        })
+    })
+</script>
+{%endblock%}

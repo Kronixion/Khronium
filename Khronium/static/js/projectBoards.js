@@ -39,7 +39,7 @@ $(document).on("click",".editItem",function(){
     });
 });
 
-$(document).on("click",".x2",function(){
+$(document).on("click","backSimpleTaskSlide",function(){
     let text = $(this).parent().parent();
     text.slideUp(200, function(){
         $(this).css("display","none")

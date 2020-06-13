@@ -10,18 +10,9 @@
         <div class="row">
             <div class="col-lg-12">
                 {%if formType == 'MD'%}
-                    <h1>MADRS - Result</h1>
+                    <h1>MADRS Result: [{{result}}/60]</h1>
                 {%else%}
-                    <h1>KEDS - Result</h1>
-                {%endif%}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                {%if formType == 'MD'%}
-                    <h4>The result from the questionare you have compelted is: {{result}}/60</h4>
-                {%else%}
-                    <h4>The result from the questionare you have compelted is: {{result}}/54</h4>
+                    <h1>KEDS Result: [{{result}}/54]</h1>
                 {%endif%}
             </div>
         </div>
@@ -29,29 +20,67 @@
             <div class="col-lg-12">
                 {%if formType == 'MD'%}
                     {%if result >= 0 and result <= 6 %}
-                        <p>You fit inside the first quarter which is between 0 and 6. It implies that you are depression free.</p>
+                        <p>The result obtained indicates that you have no traces of depression. Rejoice you are a problem free person.</p>
                     {%elif result >= 7 and result <= 19%}
-                        <p>You fit inside the second quarter which is between 7 and 19. This implies that you have a mild case of depression.</p>
-                        <p>Please take some time to talk to your friends or parents about you personal problems.</p>
+                        <p>The result obtained specifies that you have a mild case of derpession. </p>
+                        <div class="container withinContainer">
+                            <div class="row">
+                                <div class="col-lg-6"><div class="card">
+                                    <img class="card-img-top" src="{%static 'images/Time-Management.jpg'%}">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title"><em>Take it easy.</em></h5>
+                                        <p class="card-text">Try to releive your stress as much as possible. Go out, meet a friend and most importantly have some fun in order to release your mental exhaustion.</p>
+                                        <a href="#" class="mt-auto"><button>Time Management</button></a>
+                                    </div>
+                                </div></div>
+                                <div class="col-lg-6"><div class="card">
+                                    <img class="card-img-top" src="{%static 'images/Project-Management.jpg'%}">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title"><em>Create something you like.</em></h5>
+                                        <p class="card-text">Start building something you enjoy, in order to relieve the strain on your mind. Most importantly you should relax, so that you won't increase your mental exhaustion.</p>
+                                        <a href="{%url 'boards'%}" class="mt-auto"><button >Project Management</button></a>
+                                    </div>
+                                </div></div>
+                            </div>
+                        </div>
                     {%elif result >= 20 and result <= 34%}
-                        <p>You fit inside the third quarter which is between 20 and 34. This implies that you have a moderate case of depression.</p>
-                        <p>Please try to visit a psychologist in order to sort out your problems.</p>
+                        <p>The gained outcome specifies that out have a moderate case of depression.</p>
+                        <p>In this case, the best course of action  would be for you to meet with a psychologist and discuss your problems in detail.</p>
                     {%elif result >= 35%}
-                        <p>You fit inside the fourth quarter which is between 35 and 60. This implies that you have a mild case of depression.</p>
-                        <p><strong>Please seek medical help.</strong></p>
+                        <p>The result recived determines that you have a severe case of depression.</p>
+                        <p>The best course of action in this case is to get medical help and get you treated as soon as possible. Hang in there, you'll get better.</p>
                     {%endif%}
                 {%else%}
-                    {%if result >= 0 and result <= 6 %}
-                        <p>You fit inside the first quarter which is between 0 and 6. It implies that you are not exhausted.</p>
-                    {%elif result >= 7 and result <= 19%}
-                        <p>You fit inside the second quarter which is between 7 and 19. This implies that you have a mild case of exhaustion.</p>
-                        <p>Try to take some time off.</p>
-                    {%elif result >= 20 and result <= 34%}
-                        <p>You fit inside the third quarter which is between 20 and 34. This implies that you have a moderate case of ehaustion.</p>
-                        <p>Please try to visit a psychologist in order to sort out your exhaustion problems.</p>
-                    {%elif result >= 35%}
-                        <p>You fit inside the fourth quarter which is between 35 and 60. This implies that you have a severe case of exhaustion.</p>
-                        <p><strong>Please seek medical help.</strong></p>
+                    {%if result >= 0 and result <= 13 %}
+                        <p>The result obtained indicates that you have no problems whatsoever. You don't need to improve anything.</p>
+                    {%elif result >= 14 and result <= 27%}
+                        <p>The result obtained specifies that you have a mild case of exhaustion. </p>
+                        <div class="container withinContainer">
+                            <div class="row">
+                                <div class="col-lg-6"><div class="card">
+                                    <img class="card-img-top" src="{%static 'images/Time-Management.jpg'%}">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title"><em>Take it easy.</em></h5>
+                                        <p class="card-text">Try to releive your stress as much as possible. Go out, meet a friend and most importantly have some fun in order to release your mental exhaustion.</p>
+                                        <a href="#" class="mt-auto"><button>Time Management</button></a>
+                                    </div>
+                                </div></div>
+                                <div class="col-lg-6"><div class="card">
+                                    <img class="card-img-top" src="{%static 'images/Project-Management.jpg'%}">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title"><em>Create something you like.</em></h5>
+                                        <p class="card-text">Start building something you enjoy, in order to relieve the strain on your mind. Most importantly you should relax, so that you won't increase your mental exhaustion.</p>
+                                        <a href="{%url 'boards'%}" class="mt-auto"><button >Project Management</button></a>
+                                    </div>
+                                </div></div>
+                            </div>
+                        </div>
+                    {%elif result >= 28 and result <= 40%}
+                        <p>The gained outcome specifies that out have a moderate case of exhaustion.</p>
+                        <p>In this case, the best course of action  would be for you to meet with a psychologist and discuss your problems in detail.</p>
+                    {%elif result >= 41%}
+                        <p>The result recived determines that you have a severe case of mental exhaustion.</p>
+                        <p>The best course of action in this case is to get medical help and get you treated as soon as possible. Hang in there, you'll get better.</p>
                     {%endif%}
                 {%endif%}
             </div>

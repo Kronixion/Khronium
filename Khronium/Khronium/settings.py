@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'Account',
     'psychologicalManagement',
     'projectManagement',
+    'timeManagement',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

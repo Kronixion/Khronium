@@ -5,7 +5,7 @@ from landingPage.views import landingPage, additionalInfo, dashboard
 from Account.views import signUp, signIn, signOut, resetPassword, resetPasswordConfirm
 from psychologicalManagement.views import psychologicalDashboard, madrs, keds
 from projectManagement.views import boards, addBoard, updateBoard, deleteBoard, viewBoard, addList, deleteList, addItem, updateItem, deleteItem, moveItem
-
+from timeManagement.views import viewTimeManagement, addDailyList, removeDailyList, addEvent, updateEvent, removeEvent
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',landingPage, name='landingPage'),
@@ -30,4 +30,10 @@ urlpatterns = [
     path('boards/<int:id>/updateItem/',updateItem,name="updateItem"),
     path('boards/<int:id>/deleteItem/',deleteItem,name="deleteItem"),
     path('boards/<int:id>/moveItem/',moveItem,name="moveItem"),
+    path('time/',viewTimeManagement,name='time'),
+    path('time/addDailyList/',addDailyList,name='addDailyList'),
+    path('time/removeDailyList/',removeDailyList,name='removeDailyList'),
+    path('time/addEvent/',addEvent,name='addEvent'),
+    path('time/updateEvent/',updateEvent,name='updateEvent'),
+    path('time/removeEvent/',removeEvent,name='removeEvent'),
 ]

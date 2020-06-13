@@ -19,7 +19,7 @@
             <form action="{%url 'madrs'%}" method="POST">
                 {%csrf_token%}
                 <div class="form-group">
-                    <p>1. Try to recall how you have felt during the past week, wether your mood has been changable or much the same all the time.</p>
+                    <p>1. How has your mood been lately ?</p>
                     {{madrsForm.apparentSadness}}
                 </div>
                 <div class="form-group">
@@ -43,11 +43,11 @@
                     {{madrsForm.concentrationDifficulties}}
                 </div>
                 <div class="form-group">
-                    <p>7. What is your abbility to get things done?</p>
+                    <p>7. What is your ability to get things done?</p>
                     {{madrsForm.lassitude}}
                 </div>
                 <div class="form-group">
-                    <p>8. How would you asses your interest in your surroundings, in other people and in activities that normall give you pleasure?</p>
+                    <p>8. How would you assess your interest in your surroundings, in other people and in activities that normally give you pleasure?</p>
                     {{madrsForm.inabiityToFeel}}
                 </div>
                 <div class="form-group">

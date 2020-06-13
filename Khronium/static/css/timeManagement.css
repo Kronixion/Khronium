@@ -1,0 +1,184 @@
+#pageTitle{
+    text-align:center;
+}
+
+#zeroLists{
+    opacity: 0.4;
+    text-align: center;
+}
+
+.row:last-of-type{
+    margin-top:2%;
+}
+
+.list-top{
+    margin-bottom: 4%;
+}
+
+.list-top .card-title{
+    margin-bottom:0px;
+}
+
+.card-body button, #closeOverlay{
+    background-color: transparent;
+    color:black;
+    border: 1px solid black;
+    transition: 0.2s all;
+}
+
+.card-body button:hover, #closeOverlay:hover{
+    color:white;
+    background-color: black;
+}
+
+.card-body button:focus, #closeOverlay:focus{
+    outline:none;
+}
+
+.col-lg-3, .col-md-6{
+    margin-top: 3%;
+}
+
+#windowOverlay,#windowOverlay2{
+  position: fixed;
+  display: none; 
+  width: 100%; 
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 2000; 
+}
+
+.addTaskContainer{
+    width: 400px;
+    background-color:white;
+    border: 1px solid black;
+    margin-top:10%;
+}
+
+.addTaskTop{
+    margin-top: 5%;
+    margin-bottom:2%;
+}
+
+#addTaskOptions button{
+    width: 100%;
+    height:50px;
+
+}
+
+.addTaskContainer .card{
+    margin-bottom:4%;
+}
+
+.addTaskContainer .card-body{
+    padding:0px;
+}
+
+.addSimpleTask{
+    display:none;
+}
+
+.addSimpleTask input::placeholder, .addSimpleTask textarea::placeholder{
+    text-align: center;
+}
+
+.eventItem{
+    border:1px solid black;
+    margin-bottom:2%;
+    padding: 2%;
+}
+
+.eventItem h6{
+    text-align: center;
+}
+
+.eventItem .eventDescription{
+    margin-bottom: 2%;
+}
+
+.eventDescription{
+    cursor: pointer;
+}
+
+.eventDescriptionUpdate{
+    margin-bottom: 2%;
+}
+
+.addProjectTask{
+    display: none;
+}
+
+.addProjectTask ul{
+    display: none;
+    list-style:none;
+    padding:0px;
+}
+
+.projectTasks button{
+    width:100%;
+    height:50px;
+    text-align: left;
+}
+
+.addProjectTask .projectList{
+    padding-left: 20px;
+}
+.addProjectTask .projectItem{
+    padding-left: 40px;
+}
+
+#backProjectTaskSlide{
+    margin-top:2%;
+}
+
+.card-body.addProjectTask, .card-body.addSimpleTask{
+    padding:20px;
+}
+
+#windowOverlay2 .container{
+    margin-top: 5%;
+    background-color: white;
+    border: 1px solid black;
+    width: 300px;
+    padding-top: 25px;
+    padding: 0px;
+}
+
+#windowOverlay2 h3{
+    margin-top: 2%;
+    text-align: center;
+}
+
+.projectTasks2{
+    margin-bottom: 3%;
+}
+
+.projectTasks2 button{
+    width: 100%;
+    text-align: left;
+    height: 50px;
+    font-size: 20px;
+    color: black;
+    border: 1px solid black;
+    background-color: transparent;
+    transition: 0.2s all;
+}
+
+.projectTasks2 button:hover{
+    color:white;
+    background-color: black;
+}
+.projectTasks2 button:focus{
+    outline:none;
+}
+
+.projectTasks2 ul{
+    display: none;
+    list-style: none;
+    padding: 0px;
+}
+

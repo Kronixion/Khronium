@@ -2,9 +2,9 @@ from django import forms
 
 class KEDSForm(forms.Form):
     abilityToConcentrate = forms.ChoiceField(widget=forms.RadioSelect, choices=
-        [('0','0. I do not have any difficulty concentrating, and can read, watch TV and converse normally.'),
+        [('0','0. I do not have any difficulty concentrating.'),
          ('1','1.'),
-         ('2','2. I occasionally have difficulty keeping my thoughts together on things that would normally hold myattention.'),
+         ('2','2. I occasionally have difficulty keeping my thoughts together on things that would normally hold my attention.'),
          ('3','3.'),
          ('4','4. I have often difficulty concentrating.'),
          ('5','5.'),
@@ -13,7 +13,7 @@ class KEDSForm(forms.Form):
     memory = forms.ChoiceField(widget=forms.RadioSelect, choices=
         [('0','0. I remember names, dates, and what I am supposed to do.'),
          ('1','1.'),
-         ('2','2. Sometimes I forget things that are not so important, but if I pull myself together I can usuallyremember. '),
+         ('2','2. Sometimes I forget things that are not so important, but if I pull myself together I can usually remember. '),
          ('3','3.'),
          ('4','4. I often forget appointments or names of people whom I know very well.'),
          ('5','5.'),
@@ -88,7 +88,7 @@ class MADRSForm(forms.Form):
     apparentSadness = forms.ChoiceField(widget=forms.RadioSelect, choices=
         [('0','0. No sadness'),
          ('1','1.'),
-         ('2','2. Looks dispirited but does brighten up without dificulty.'),
+         ('2','2. Looks disparate but does brighten up without difficulty.'),
          ('3','3.'),
          ('4','4. Appears sad and unhappy most of the time.'),
          ('5','5.'),
@@ -97,16 +97,16 @@ class MADRSForm(forms.Form):
     reportedSadness = forms.ChoiceField(widget=forms.RadioSelect, choices=
         [('0','0. Occasional sadness in keeping with the circumstances.'),
          ('1','1.'),
-         ('2','2. Sad or low but brightens up without dificulty.'),
+         ('2','2. Sad or low but brightens up without difficulty.'),
          ('3','3.'),
-         ('4','4. Pervasive feelings of sadness or gloominess. The mood is still influenced bu external circumstances.'),
+         ('4','4. Pervasive feelings of sadness or gloominess. The mood is still influenced by external circumstances.'),
          ('5','5.'),
          ('6','6. Continuous or unvarying sadness, misery or desponderncy.')
         ])
     innerTension = forms.ChoiceField(widget=forms.RadioSelect, choices=
         [('0','0. Placid. Only fleeting inner tension.'),
          ('1','1.'),
-         ('2','2. Ocacasion feelings of edginess and ill-defined discomfort.'),
+         ('2','2. Occasional feelings of edginess and ill-defined discomfort.'),
          ('3','3.'),
          ('4','4. Continuous feelings of inner tension or intermittent panic which the patient can only master with some difficulty.'),
          ('5','5.'),
@@ -128,14 +128,14 @@ class MADRSForm(forms.Form):
          ('3','3.'),
          ('4','4. No appetite. Food is tasteless.'),
          ('5','5.'),
-         ('6','6. Needs persuassion to eat at all.')
+         ('6','6. Needs persuasion to eat at all.')
         ])
     concentrationDifficulties = forms.ChoiceField(widget=forms.RadioSelect, choices=
         [('0','0. No difficulties in concentrating.'),
          ('1','1.'),
          ('2','2. Occasional difficulties in collecting one\'s thoughts.'),
          ('3','3.'),
-         ('4','4. Difficulties in concentrating and sustaining thought which reduces ability to read or hold a conversasion.'),
+         ('4','4. Difficulties in concentrating and sustaining thought which reduces ability to read or hold a conversation.'),
          ('5','5.'),
          ('6','6. Unable to read or converse without great difficulty.')
         ])
@@ -149,20 +149,20 @@ class MADRSForm(forms.Form):
          ('6','6. Complete lassitude. Unable to do anything without help.')
         ])
     inabiityToFeel = forms.ChoiceField(widget=forms.RadioSelect, choices=
-        [('0','0. Normal interesnt in the surroundings and in other people.'),
+        [('0','0. Normal interest in the surroundings and in other people.'),
          ('1','1.'),
          ('2','2. Reduced ability to enjoy usual interests.'),
          ('3','3.'),
-         ('4','4. Loss of interesnt in the surroundings. Loss of feelings for friends and acquaintances.'),
+         ('4','4. Loss of interest in the surroundings. Loss of feelings for friends and acquaintances.'),
          ('5','5.'),
          ('6','6. The experience of being emotionally paralysed, inability to feel anger, grief or pleasure and a complete or even painful failure to feel for close relatives and friends.')
         ])
     passingThoughts = forms.ChoiceField(widget=forms.RadioSelect, choices=
         [('0','0. No pessimistic thoughts.'),
          ('1','1.'),
-         ('2','2. Fluctuating ideas of failure, self-reproach or seld deprecation.'),
+         ('2','2. Fluctuating ideas of failure, self-reproach or self deprecation.'),
          ('3','3.'),
-         ('4','4. Persistent self-accusation, or definite but stil rational ideas of guilt or sin. Increasingly pessimistic about the future.'),
+         ('4','4. Persistent self-accusation, or definite but still rational ideas of guilt or sin. Increasingly pessimistic about the future.'),
          ('5','5.'),
          ('6','6. Delusions of ruin, remorse or unredeemable sin. Self-accusations which are absurd and unshakable.')
         ])
