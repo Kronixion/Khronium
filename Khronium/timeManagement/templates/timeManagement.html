@@ -45,8 +45,11 @@
 <div id="windowOverlay2">
     <div class="container">
         <div class="col-xl-12">
-            <div class="projectTasks2">
+            <div class="separatorOverlay2 d-flex justify-content-between">
                 <h3><strong>Select a list: </strong></h3>
+                <button id="closeOverlay2"><i class="fas fa-times"></i></button>
+            </div>
+                <div class="projectTasks2">
                 {%for board in projectBoards%}
                     <div class="dropdown">
                         <button class="dropDown">Project - {{board.title|title}}</button>
@@ -55,7 +58,7 @@
                                 {%if list.dashboard == board%}
                                 <li>
                                 <div class="dropdown">
-                                    <button class="projectList" ><i class="fas fa-angle-double-right"></i> List - {{list.title}}</button>
+                                    <button class="projectListModifier" value="{{list.id}}"><i class="fas fa-angle-double-right"></i> List - {{list.title}}</button>
                                 </li>
                                 {%endif%}
                             {%endfor%}
@@ -351,9 +354,23 @@
         projectTask = $(this).attr("value");
     })
 
+    $(document).on("click",".projectListModifier",function(){
+        let listId = $(this).attr("value")
+        $.post("{%url 'moveEvent'%}",{
+            "csrfmiddlewaretoken":csrftoken,
+            "listId":listId,
+            "projectTask":projectTask,
+        }).done(function(data){
+            
+        })
+    })
+
     // close overlay
     $("#closeOverlay").click(function(){
         $("#windowOverlay").css("display","none");
+    });
+    $("#closeOverlay2").click(function(){
+        $("#windowOverlay2").css("display","none");
     });
 
 

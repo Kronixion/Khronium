@@ -19,19 +19,19 @@
     margin-bottom:0px;
 }
 
-.card-body button, #closeOverlay{
+.card-body button, #closeOverlay, #closeOverlay2{
     background-color: transparent;
     color:black;
     border: 1px solid black;
     transition: 0.2s all;
 }
 
-.card-body button:hover, #closeOverlay:hover{
+.card-body button:hover, #closeOverlay:hover,#closeOverlay2:hover{
     color:white;
     background-color: black;
 }
 
-.card-body button:focus, #closeOverlay:focus{
+.card-body button:focus, #closeOverlay:focus ,#closeOverlay2:focus{
     outline:none;
 }
 
@@ -149,8 +149,8 @@
 }
 
 #windowOverlay2 h3{
-    margin-top: 2%;
     text-align: center;
+    margin-bottom: 0px;
 }
 
 .projectTasks2{
@@ -182,3 +182,7 @@
     padding: 0px;
 }
 
+.separatorOverlay2{
+    margin-top:2%;
+    margin-bottom:2%;
+}

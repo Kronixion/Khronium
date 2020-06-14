@@ -5,7 +5,7 @@ from landingPage.views import landingPage, additionalInfo, dashboard
 from Account.views import signUp, signIn, signOut, resetPassword, resetPasswordConfirm
 from psychologicalManagement.views import psychologicalDashboard, madrs, keds
 from projectManagement.views import boards, addBoard, updateBoard, deleteBoard, viewBoard, addList, deleteList, addItem, updateItem, deleteItem, moveItem
-from timeManagement.views import viewTimeManagement, addDailyList, removeDailyList, addEvent, updateEvent, removeEvent
+from timeManagement.views import viewTimeManagement, addDailyList, removeDailyList, addEvent, updateEvent, removeEvent, moveProjectTaskToAnotherList
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',landingPage, name='landingPage'),
@@ -36,4 +36,5 @@ urlpatterns = [
     path('time/addEvent/',addEvent,name='addEvent'),
     path('time/updateEvent/',updateEvent,name='updateEvent'),
     path('time/removeEvent/',removeEvent,name='removeEvent'),
+    path('time/moveEvent/',moveProjectTaskToAnotherList,name="moveEvent")
 ]

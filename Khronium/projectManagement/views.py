@@ -128,6 +128,6 @@ def moveItem(request,id):
         item = Item.objects.get(id=request.POST['itemId'])
         item.unorderedList = uList
         item.save()
-        return redirect('viewBoard',id=id)
+        return HttpResponse("Success")
     else:
-        return redirect('viewBoard',id=id)
+        return HttpResponse("Get Request")

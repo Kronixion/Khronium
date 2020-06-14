@@ -41,7 +41,7 @@
                 </ul>
                 <button class="AddItems">Add Items</button>
                 <div class="itemInput">
-                    <textarea  cols="43" rows="2" placeholder="Enter Text"></textarea>
+                    <textarea  cols="32" rows="2" placeholder="Enter Text"></textarea>
                     <div class="listButtons">
                         <button class="addItem" value="{{list.id}}">Add Item</button>
                         <button class="x">X</button>
@@ -121,7 +121,7 @@
             'listId':listId,
             'itemText':itemText,
         }).done(function(data){
-            $("#listItems-"+listId).append("<div class=\"card\"><div class=\"card-body\"><p>"+itemText+"</p><button class=\"editItem\"><i class=\"fas fa-pen\"></i></button><button class=\"deleteItem\" value=\""+data+"\"><i class=\"fas fa-trash-alt\"></i></button></div><div class=\"editItemTab card-body\" style=\"display:none;\"><textarea  cols=\"35\" rows=\"3\">"+itemText+"</textarea><div class=\"listButtons\"><button class=\"editItemButton\" value=\""+data+"\">Edit Item</button><button class=\"x2\">X</button></div></div></div>");
+            $("#listItems-"+listId).append("<div class=\"card\" value=\""+data+"\"><div class=\"card-body\"><p>"+itemText+"</p><button class=\"editItem\"><i class=\"fas fa-pen\"></i></button><button class=\"deleteItem\" value=\""+data+"\"><i class=\"fas fa-trash-alt\"></i></button></div><div class=\"editItemTab card-body\" style=\"display:none;\"><textarea  cols=\"35\" rows=\"3\">"+itemText+"</textarea><div class=\"listButtons\"><button class=\"editItemButton\" value=\""+data+"\">Edit Item</button><button class=\"x2\">X</button></div></div></div>");
         });
     })
 

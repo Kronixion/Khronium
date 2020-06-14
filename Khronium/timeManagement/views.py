@@ -86,3 +86,14 @@ def removeEvent(request):
         return HttpResponse("Deletion Successfull")
     else:
         HttpResponse("Get Request")
+
+def moveProjectTaskToAnotherList(request):
+    if request.method=="POST":
+        unorderedList = UnorderedList.objects.get(id=request.POST["listId"])
+        event = Event.objects.get(id=request.POST["projectTask"])
+        item = Item.objects.get(id=event.itemId)
+        item.unorderedList = unorderedList
+        item.save()
+        event.itemId = -1
+        event.save()
+        return HttpResponse("Success")
