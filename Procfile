@@ -1,1 +1,1 @@
-web: gunicorn Khronium.wsgi
+web: gunicorn Khronium.wsgi --log-file -
