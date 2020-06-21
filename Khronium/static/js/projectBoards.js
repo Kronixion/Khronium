@@ -25,9 +25,19 @@ $(document).on("click",".AddItems",function(){
     $(this).next().css("display","block");
 });
 
+
 $(document).on("click",".x",function(){
     $(this).parent().parent().css("display","none")
     $(this).parent().parent().prev().css("display","block")
+});
+
+$(document).on("click",".x2",function(){
+    $(this).parent().parent().slideUp(200,function(){
+        $(this).css("display","none");
+        $(this).prev().slideDown(200,function(){
+            $(this).css("display","block")
+        })
+    })
 });
 
 $(document).on("click",".editItem",function(){
