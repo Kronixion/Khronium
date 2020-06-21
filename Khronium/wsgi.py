@@ -1,5 +1,5 @@
 """
-WSGI config for Chronium project.
+WSGI config for Khronium project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Chronium.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Khronium.settings')
 
 application = get_wsgi_application()
