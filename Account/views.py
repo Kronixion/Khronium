@@ -79,7 +79,7 @@ def signIn(request):
                     message = 'Wrong password!'
                     return render(request, 'signIn.html',{'form':form,'message':message})
                 else:
-                    message = 'Wrong username or password!'
+                    message = 'Wrong username!'
                     return render(request, 'signIn.html',{'form':form,'message':message})
         else: 
             return render(request, 'signIn.html',{'form':form})

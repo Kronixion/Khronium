@@ -9,6 +9,7 @@ from .forms import NewBoard
 # Models
 from Account.models import Account
 from .models import ProjectBoard, UnorderedList, Item
+from timeManagement.models import Event
 
 @login_required
 def boards(request):
@@ -117,6 +118,14 @@ def updateItem(request,id):
 def deleteItem(request,id):
     if request.method == "POST":
         item = Item.objects.get(id=request.POST['itemId'])
+        try:
+            event = Event.objects.get(itemId = request.POST['itemId'])
+        except Event.DoesNotExist:
+            event = None
+        if event is not None:
+            event.itemId = -1
+            event.save()
+
         item.delete()
         return redirect('viewBoard',id=id)
     else:

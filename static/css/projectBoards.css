@@ -92,7 +92,7 @@ h5{
 }
 
 .listButtons button:nth-of-type(1){
-    width: 30%
+    width: 35%;
 }
 .listButtons button:nth-of-type(2){
     width: 10%;
@@ -120,4 +120,9 @@ h5{
 .card-body button{
     width:15%;
 }
+
 /* Styling the item lists */
+
+button:focus, textarea:focus{
+    outline:none;
+}
