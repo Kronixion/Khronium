@@ -50,8 +50,6 @@ def signIn(request):
                 if account.lockoutDateTime is not None:
                     unlockTime = account.lockoutDateTime + timedelta(minutes=5)
                     unlockTime = unlockTime.replace(tzinfo=None)
-                    print(unlockTime)
-                    print(datetime.now())
                     if datetime.now() < unlockTime:
                         message = 'Yout account is locked, due to too many login attempts!'
                         return render(request, 'signIn.html',{'form':form,'message':message})
@@ -77,6 +75,10 @@ def signIn(request):
                         account.lockoutDateTime = datetime.now()
                     account.save()
                     message = 'Wrong password!'
+                    unlockTime = account.lockoutDateTime + timedelta(minutes=5)
+                    unlockTime = unlockTime.replace(tzinfo=None)
+                    if datetime.now() < unlockTime:
+                        message = 'Yout account is locked, due to too many login attempts!'
                     return render(request, 'signIn.html',{'form':form,'message':message})
                 else:
                     message = 'Wrong username!'
@@ -116,6 +118,7 @@ def resetPasswordConfirm(request,token):
         if request.POST['password'] == request.POST['passwordConfirm']:
             account.user.set_password(request.POST['password'])
             account.token=''
+            account.lockoutDateTime = None
             account.user.save()
             account.save()
             return redirect('signIn')

@@ -116,7 +116,7 @@
     padding: 15px;
 }
 
-#options #filter,#options #addList{
+#options #filter,#options #addList, #options #clearFilter{
     width: 40px;
     height:40px;
     margin: 5% 0% 0% 40%;
