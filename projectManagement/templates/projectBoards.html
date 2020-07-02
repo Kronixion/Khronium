@@ -96,7 +96,7 @@
                 'listName':listName,
             }
         ).done(function(data){
-            $("#specialList").before("<div class=\"list\"><div class=\"d-flex justify-content-between\"><h5>"+listName+"</h5><button class=\"deleteList\" value="+data+"><i class=\"fas fa-trash-alt\"></i></button></div><ul id=\"listItems-"+data+"\" class=\"connectedSortable\" value=\""+data+"\"></ul><button class=\"AddItems\">Add Items</button><div class=\"itemInput\" style=\"display:none;\"><textarea  cols=\"43\" rows=\"2\" placeholder=\"Enter Text\"></textarea><div class=\"listButtons\"><button class=\"addItem\" value="+data+">Add Item</button><button class=\"x\">X</button></div></div></div>")
+            $("#specialList").before("<div class=\"list\"><div class=\"d-flex justify-content-between\"><h5>"+listName+"</h5><button class=\"deleteList\" value="+data+"><i class=\"fas fa-trash-alt\"></i></button></div><ul id=\"listItems-"+data+"\" class=\"connectedSortable\" value=\""+data+"\"></ul><button class=\"AddItems\">Add Items</button><div class=\"itemInput\" style=\"display:none;\"><textarea  cols=\"32\" rows=\"2\" placeholder=\"Enter Text\"></textarea><div class=\"listButtons\"><button class=\"addItem\" value="+data+">Add Item</button><button class=\"x\">X</button></div></div></div>")
             $("#listItems-"+data).sortable({connectWith: ".connectedSortable"});
             $("#listItems-"+data).sortable("refresh");
         });
@@ -121,7 +121,7 @@
             'listId':listId,
             'itemText':itemText,
         }).done(function(data){
-            $("#listItems-"+listId).append("<div class=\"card\" value=\""+data+"\"><div class=\"card-body\"><p>"+itemText+"</p><button class=\"editItem\"><i class=\"fas fa-pen\"></i></button><button class=\"deleteItem\" value=\""+data+"\"><i class=\"fas fa-trash-alt\"></i></button></div><div class=\"editItemTab card-body\" style=\"display:none;\"><textarea  cols=\"35\" rows=\"3\">"+itemText+"</textarea><div class=\"listButtons\"><button class=\"editItemButton\" value=\""+data+"\">Edit Item</button><button class=\"x2\">X</button></div></div></div>");
+            $("#listItems-"+listId).append("<div class=\"card\" value=\""+data+"\"><div class=\"card-body\"><p>"+itemText+"</p><button class=\"editItem\"><i class=\"fas fa-pen\"></i></button><button class=\"deleteItem\" value=\""+data+"\"><i class=\"fas fa-trash-alt\"></i></button></div><div class=\"editItemTab card-body\" style=\"display:none;\"><textarea  cols=\"27\" rows=\"3\">"+itemText+"</textarea><div class=\"listButtons\"><button class=\"editItemButton\" value=\""+data+"\">Edit Item</button><button class=\"x2\">X</button></div></div></div>");
         });
     })
 
